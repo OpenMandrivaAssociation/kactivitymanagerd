@@ -45,4 +45,10 @@ KDE Plasma 5 Activities.
 %find_lang kactivities5
 
 %files -f kactivities5.lang
-%{_bindir}/%{name}5
+%dir %{_libdir}/qt5/plugins/%{name}
+%dir %{_libdir}/qt5/plugins/%{name}/1
+%{_bindir}/%{name}
+%{_libdir}/lib%{name}_plugin.so
+%{_libdir}/qt5/plugins/%{name}/1/%{name}_*.so
+%{_datadir}/kservices5/%{name}.desktop
+%{_datadir}/kservicetypes5/%{name}-plugin.desktop
