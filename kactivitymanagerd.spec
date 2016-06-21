@@ -2,12 +2,16 @@
 
 Name: kactivitymanagerd
 Version: 5.6.5
-Release: 1
+Release: 2
 Source0: http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.tar.xz
 Summary: KDE Plasma 5 Activities
 URL: http://kde.org/
 License: GPL
 Group: System/Libraries
+# (tpg) from upstream git
+# hopefully fixes https://issues.openmandriva.org/show_bug.cgi?id=1495
+Patch0: 0000-Disable-session-management-for-kactivitymanagerd.patch
+Patch1: 0001-Removing-the-failed-attempt-to-bypass-the-QtSQL-bug.patch
 BuildRequires: pkgconfig(Qt5Core)
 BuildRequires: pkgconfig(Qt5DBus)
 BuildRequires: pkgconfig(Qt5Gui)

@@ -1,0 +1,93 @@
+From d7664c10439d38e9e1bbb133c3abe003b0ce9ada Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Ivan=20=C4=8Cuki=C4=87?= <ivan.cukic@kde.org>
+Date: Wed, 4 May 2016 17:38:25 +0200
+Subject: [PATCH] Removing the failed attempt to bypass the QtSQL bug
+
+---
+ src/service/Application.cpp | 32 ++++++--------------------------
+ 1 file changed, 6 insertions(+), 26 deletions(-)
+
+diff --git a/src/service/Application.cpp b/src/service/Application.cpp
+index d9802a1..7cddf67 100644
+--- a/src/service/Application.cpp
++++ b/src/service/Application.cpp
+@@ -142,7 +142,7 @@ void Application::init()
+ {
+     if (!KDBusConnectionPool::threadConnection().registerService(
+             KAMD_DBUS_SERVICE)) {
+-        exit(EXIT_SUCCESS);
++        QCoreApplication::exit(EXIT_SUCCESS);
+     }
+ 
+     // KAMD is a daemon, if it crashes it is not a problem as
+@@ -325,7 +325,7 @@ int main(int argc, char **argv)
+     const auto arguments = application.arguments();
+ 
+     if (arguments.size() == 0) {
+-        exit(EXIT_FAILURE);
++        QCoreApplication::exit(EXIT_FAILURE);
+ 
+     } else if (arguments.size() != 1 && (arguments.size() != 2 || arguments[1] == "--help")) {
+ 
+@@ -336,14 +336,14 @@ int main(int argc, char **argv)
+             << "start-daemon\tStarts the service without forking (use with caution)\n"
+             << "--help\tThis help message\n";
+ 
+-        exit(EXIT_SUCCESS);
++        QCoreApplication::exit(EXIT_SUCCESS);
+ 
+     } else if (arguments.size() == 1 || arguments[1] == "start") {
+ 
+         // Checking whether the service is already running
+         if (isServiceRunning()) {
+             QTextStream(stdout) << "Already running\n";
+-            exit(EXIT_SUCCESS);
++            QCoreApplication::exit(EXIT_SUCCESS);
+         }
+ 
+         // Creating the watcher, but not on the wall
+@@ -358,7 +358,7 @@ int main(int argc, char **argv)
+                     << "Service started, version: " << runningServiceVersion()
+                     << "\n";
+ 
+-                exit(EXIT_SUCCESS);
++                QCoreApplication::exit(EXIT_SUCCESS);
+             });
+ 
+         // Starting the dameon
+@@ -373,7 +373,7 @@ int main(int argc, char **argv)
+     } else if (arguments[1] == "stop") {
+         if (!isServiceRunning()) {
+             QTextStream(stdout) << "Service not running\n";
+-            exit(EXIT_SUCCESS);
++            QCoreApplication::exit(EXIT_SUCCESS);
+         }
+ 
+         callOnRunningService<void>("quit");
+@@ -411,23 +411,3 @@ int main(int argc, char **argv)
+     }
+ }
+ 
+-#ifndef DISABLE_CSIGNAL_HANDLING
+-
+-#include <csignal>
+-
+-struct CleanUpOnExit{
+-
+-    CleanUpOnExit() {
+-        signal(SIGINT,   &CleanUpOnExit::exit);
+-        signal(SIGTERM,  &CleanUpOnExit::exit);
+-    }
+-
+-    static void exit(int sig) {
+-        Q_UNUSED(sig)
+-
+-        QCoreApplication::exit(0);
+-    }
+-
+-} cleanup;
+-
+-#endif
+-- 
+1.9.5
+
