@@ -1,4 +1,5 @@
 removed_sources:
   kactivitymanagerd-5.12.3.tar.xz: a5e7e2346523f80f7c52e3cd225d489eeed6a328
-sources:
   kactivitymanagerd-5.12.6.tar.xz: 9afbd837c7337a5843c03c9975b6b2d80a01b148
+sources:
+  kactivitymanagerd-5.12.7.tar.xz: 92ad0460a0f7bb7354415751ea62f1aeab1286b5
