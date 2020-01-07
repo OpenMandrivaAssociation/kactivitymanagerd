@@ -1,7 +1,7 @@
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 
 Name: kactivitymanagerd
-Version:	5.17.4
+Version:	5.17.5
 Release: 1
 Source0: http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.tar.xz
 Summary: KDE Plasma 5 Activities
@@ -33,8 +33,7 @@ Requires: kactivities >= 5.20.0
 KDE Plasma 5 Activities.
 
 %prep
-%setup -q
-%apply_patches
+%autosetup -p1
 %cmake_kde5
 
 %build
