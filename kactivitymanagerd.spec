@@ -1,8 +1,8 @@
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 
 Name: kactivitymanagerd
-Version:	5.17.5
-Release: 2
+Version:	5.18.0
+Release: 1
 Source0: http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.tar.xz
 Summary: KDE Plasma 5 Activities
 URL: http://kde.org/
