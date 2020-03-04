@@ -2,7 +2,7 @@
 
 Name: kactivitymanagerd
 Version:	5.18.2
-Release: 1
+Release: 2
 Source0: http://download.kde.org/%{stable}/plasma/%{version}/%{name}-%{version}.tar.xz
 Summary: KDE Plasma 5 Activities
 URL: http://kde.org/
