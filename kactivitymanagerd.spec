@@ -1,8 +1,8 @@
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 
 Name: kactivitymanagerd
-Version:	5.25.5
-Release: 2
+Version:	5.25.90
+Release: 1
 Source0: http://download.kde.org/%{stable}/plasma/%(echo %{version} |cut -d. -f1-3)/%{name}-%{version}.tar.xz
 Summary: KDE Plasma 5 Activities
 URL: http://kde.org/
@@ -52,7 +52,6 @@ KDE Plasma 5 Activities.
 %{_libdir}/libexec/kactivitymanagerd
 %{_libdir}/qt5/plugins/%{name}/1/%{name}_*.so
 %{_datadir}/kservices5/%{name}.desktop
-%{_datadir}/kservicetypes5/%{name}-plugin.desktop
 %{_prefix}/lib/systemd/user/plasma-kactivitymanagerd.service
 %{_datadir}/dbus-1/services/org.kde.ActivityManager.service
 %{_datadir}/krunner/dbusplugins/plasma-runnners-activities.desktop
