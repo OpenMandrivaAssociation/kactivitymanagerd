@@ -3,9 +3,9 @@
 %define gitbranch Plasma/6.0
 %define gitbranchd %(echo %{gitbranch} |sed -e "s,/,-,g")
 
-Name: plasma6-kactivitymanagerd
+Name: kactivitymanagerd
 Version:	6.3.4
-Release: %{?git:0.%{git}.}2
+Release: %{?git:0.%{git}.}3
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/plasma/kactivitymanagerd/-/archive/%{gitbranch}/kactivitymanagerd-%{gitbranchd}.tar.bz2#/kactivitymanagerd-%{git}.tar.bz2
 %else
@@ -37,27 +37,16 @@ BuildRequires: cmake(KF6GlobalAccel)
 BuildRequires: cmake(KF6XmlGui)
 BuildRequires: boost-devel
 Requires: qt6-qtbase-sql-sqlite
+BuildSystem: cmake
+BuildOption: -DBUILD_QCH:BOOL=ON
+BuildOption: -DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON
+# Renamed after 6.0 2025-05-01
+%rename plasma6-kactivitymanagerd
 
 %description
 KDE Plasma 6 Activities.
 
-%prep
-%autosetup -p1 -n kactivitymanagerd-%{?git:%{gitbranchd}}%{!?git:%{version}}
-%cmake \
-	-DBUILD_QCH:BOOL=ON \
-	-DBUILD_WITH_QT6:BOOL=ON \
-	-DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON \
-	-G Ninja
-
-%build
-%ninja_build -C build
-
-%install
-%ninja_install -C build
-
-%find_lang kactivities6 || touch kactivities6.lang
-
-%files -f kactivities6.lang
+%files -f %{name}.lang
 %{_datadir}/qlogging-categories6/kactivitymanagerd.categories
 %{_libdir}/libkactivitymanagerd_plugin.so
 %{_libdir}/libexec/kactivitymanagerd
