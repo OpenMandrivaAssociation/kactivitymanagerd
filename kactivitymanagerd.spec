@@ -4,7 +4,7 @@
 %define gitbranchd %(echo %{gitbranch} |sed -e "s,/,-,g")
 
 Name: kactivitymanagerd
-Version:	6.4.2
+Version:	6.4.4
 Release: %{?git:0.%{git}.}1
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/plasma/kactivitymanagerd/-/archive/%{gitbranch}/kactivitymanagerd-%{gitbranchd}.tar.bz2#/kactivitymanagerd-%{git}.tar.bz2
